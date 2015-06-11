@@ -411,7 +411,25 @@ class P extends CActiveRecord
 		return parent::model($className);
 	}
 
-
+    public function getSearchTeachers($name)
+    {
+        if (empty($name))
+            return array();	
+		$sql = <<<SQL
+        SELECT p1,p3,p4,p5,k1,k2,k3,ks1,ks3 FROM p
+			INNER JOIN PD ON (P1=PD2)
+			INNER JOIN K ON (PD4=K1)
+			INNER JOIN KS ON (K10=KS1)
+		WHERE pd2>0 and pd3='0' and pd28 in (0,2,5,9) and pd13 is null and p3 CONTAINING :name
+		GROUP BY p1,p3,p4,p5,k1,k2,k3,ks1,ks3
+        ORDER BY p3 collate UNICODE,p4,p5,k2
+SQL;
+		$command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':name', $name);
+        $teachers = $command->queryAll();
+        return $teachers;
+    }
+    
     public function getTeachersFor($chairId)
     {
         $criteria=new CDbCriteria;

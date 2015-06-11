@@ -10,7 +10,16 @@ $this->pageHeader=tt('Расписание преподавателя');
 $this->breadcrumbs=array(
     tt('Расписание'),
 );
-
+$url = Yii::app()->baseUrl.'/images/keyboard.png';
+Yii::app()->clientScript->registerScript('params', <<<JS
+    var imageUrl = '{$url}';
+    $(document).ready(function(){
+        VKI_imageURI = imageUrl;
+    });
+    
+JS
+ , CClientScript::POS_HEAD
+);
 Yii::app()->clientScript->registerPackage('jquery.ui');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl.'/js/timetable/timetable.js', CClientScript::POS_HEAD);
 
@@ -21,6 +30,12 @@ JS
     , CClientScript::POS_READY);
 
 $attr = array('class'=>'chosen-select', 'autocomplete' => 'off', 'empty' => '&nbsp;');
+
+
+$this->renderPartial('search_teacher_form', array(
+    'teacher' => $teacher,
+));
+
 $form=$this->beginWidget('CActiveForm', array(
     'id'=>'timeTable-form',
     'htmlOptions' => array('class' => 'form-inline')

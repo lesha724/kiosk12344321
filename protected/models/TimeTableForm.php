@@ -31,7 +31,7 @@ class TimeTableForm extends CFormModel
             array('filial, date1, date2, r11', 'required'),
 
             array('chair, teacher', 'numerical', 'allowEmpty' => false, 'on' => 'teacher'),
-			array('chair, teacher', 'required', 'on' => 'teacher'),
+            array('chair, teacher', 'required', 'on' => 'teacher'),
 
             array('faculty, course, group', 'numerical', 'allowEmpty' => false, 'on' => 'group, student'),
             array('faculty, course, group', 'required', 'on' => 'group, student'),
@@ -52,21 +52,37 @@ class TimeTableForm extends CFormModel
 	 */
 	public function attributeLabels()
 	{
-		return array(
-			'filial'=> tt('Филиал'),
-			'chair'=> tt('Кафедра'),
+		$arr= array(
+			'filial'=> tt('Учебн. заведение'),
 			'faculty'=> tt('Факультет'),
-			'course'=> tt('Курс'),
-			'group'=> tt('Группа'),
-			'teacher'=> tt('Преподаватель'),
-			'student'=> tt('Студент'),
-			'classroom'=> tt('Аудитория'),
-			'housing'=> tt('Корпус'),
-            'r11' => tt('Индикация изменений в расписании'),
-            'date1' => tt('Дата'),
-            'lessonStart' => tt('Начало'),
-            'lessonEnd' => tt('Окончание'),
 		);
+		
+		$sql=<<<SQL
+			select b15 from b where b1=0
+SQL;
+		$command = Yii::app()->db->createCommand($sql);
+		$id=$command->queryRow();
+		if(!empty($id['b15'])&&$id['b15']==7)
+			$arr= array(
+				'filial'=> tt('Факультет'),
+				'faculty'=> tt('Вид подготовки'),
+			);
+			
+		return array(
+                    //'filial'=> tt('Филиал'),
+                    'chair'=> tt('Кафедра'),
+                    //'faculty'=> tt('Факультет'),
+                    'course'=> tt('Курс'),
+                    'group'=> tt('Группа'),
+                    'teacher'=> tt('Преподаватель'),
+                    'student'=> tt('Студент'),
+                    'classroom'=> tt('Аудитория'),
+                    'housing'=> tt('Корпус'),
+                    'r11' => tt('Индикация изменений в расписании'),
+                    'date1' => tt('Дата'),
+                    'lessonStart' => tt('Начало'),
+                    'lessonEnd' => tt('Окончание'),
+		)+$arr;
 	}
 
     public function getMinMaxLessons($timeTable)
