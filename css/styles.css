@@ -1,0 +1,312 @@
+.hide {
+    display: none;
+}
+.login-container {
+    width:auto !important;
+}
+#login-box {
+    font-size: 15px;
+}
+.authorization-header {
+    background-color: #2283C5 ;
+    color: white;
+}
+
+div.journal_div_table2 {
+    width:60%;
+    overflow-x:scroll;
+    float:left;
+}
+
+table.journal_table tr {
+    height:40px;
+}
+
+table.journal_table td {
+    padding: 4px;
+    vertical-align: middle;
+}
+
+
+table.small-table-1{
+    width: 15%;
+    float:left;
+}
+
+.journal_div_table2 table tr:not(.min-max) input {
+    width: 22%;
+}
+
+.journal_div_table2 th {
+    min-width: 57px;
+    text-align: center !important;
+    font-size:10px;
+}
+
+.journal-bottom td.error {
+    border:1px solid red;
+}
+
+.journal-bottom td.success {
+    border:1px solid green;
+}
+
+div.journal_div_table3 {
+    width:25%;
+    float:right;
+}
+#filter-form .ace-select{
+	min-width:220px;
+	margin-left:0px;
+}
+
+.ace-select label{
+	width:220px;
+}
+.journal_div_table3 th {
+    min-width: 45px;
+    text-align: center !important;
+    line-height:12px !important;
+    font-size:12px;
+}
+
+.journal_div_table3 td {
+    text-align: center !important;
+}
+
+.journal_div_table3 table input {
+    width: 45%;
+}
+#spinner, #spinner1, #spinner2 {
+    display: none;
+}
+tr.min-max {
+    height: 28px !important;
+
+}
+
+tr.min-max input {
+    width: 40%;
+    font-size: 10px;
+
+ }
+
+tr.min-max th {
+    padding:1px 0
+}
+
+.journal_table_1 thead tr {
+    height: 68px;
+}
+
+table.modules_table_2 td{
+    text-align: center;
+}
+table.modules_table_2 tr:not(.min-max) input {
+    width: 50%;
+}
+
+div.module_div_table2 {
+    width: 40%;
+}
+
+.modules_table_3 thead tr {
+    height: 68px;
+}
+
+
+.expanded-module input {
+    width: 90%;
+}
+
+.expanded-module tr td:last-child {
+    text-align: center;
+}
+
+
+table.timeTable {
+    border-spacing: 0px;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    line-height: 1.4em;
+    border: 1px solid #ddd;
+}
+table.timeTable td{
+    text-align: center;
+    padding: 0;
+}
+
+.lh-50{
+    line-height: 50px;
+}
+.lh-100{
+    line-height: 100px;
+}
+.lh-150{
+    line-height: 150px;
+}
+.lh-200{
+    line-height: 200px;
+}
+.lh-250{
+    line-height: 250px;
+}
+
+.mh-50{
+    min-height: 50px;
+}
+.mh-100{
+    min-height: 100px;
+}
+.mh-150{
+    min-height: 150px;
+}
+.mh-200{
+    min-height: 200px;
+}
+
+.mh-250{
+    min-height: 250px;
+}
+
+table.timeTable .cell {
+    border: 1px solid #ddd;
+    background: linear-gradient(to bottom, #fcfcfc, #f6f6f6) repeat-x scroll 0 0 #F3F3F3;
+}
+table.timeTable .cell > div {
+    min-height: 50px;
+}
+
+table.timeTable .cell > div span {
+    font-style: oblique;
+}
+
+
+table.timeTable td > div:first-child {
+    padding: 4px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #6FB3E0;
+    color: white;
+    font-weight: bold;
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+
+table.timeTable .closed *{
+    background: linear-gradient(to top, #b8b8b8, #a4a4a4);
+}
+
+table.timeTable tr td:not(:first-child) > div{
+    min-width: 115px;
+}
+
+table.timeTable div.hint {
+    display: none;
+}
+
+table.timeTable tr td:first-child > div:not(:first-child) {
+    /*padding:4px;*/
+}
+ul.classrooms-list{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 5px;
+}
+
+ul.classrooms-list li {
+    border: 1px solid #808080;
+    float: left;
+    margin: 2px;
+    text-align: center;
+    min-width: 90px;
+}
+
+.only-teachers {
+    background-color: #D9EDF7 !important;
+    border-color: #BCE8F1 !important;
+    color: #3A87AD !important;
+}
+
+.only-indexes {
+    background-color: #FCF8E3 !important;
+    border-color: #FBEED5 !important;
+    color: #C09853; !important !important;
+}
+
+.only-chairs {
+    background-color: #DFF0D8 !important;
+    border-color: #D6E9C6 !important;
+    color: #468847 !important;
+}
+
+.isOnControl {
+    border: 1px solid red !important;
+}
+
+.hasAttachesFiles {
+    border: 1px solid blue !important;
+}
+
+td.entrance-rating-title {
+    text-align: center !important;
+}
+
+div.group-box {
+    height: 250px;
+    width:  150px;
+    border: 1px solid darkgrey;
+    float: left;
+    margin: 0 5px;
+}
+div.group-title{
+    text-align: center;
+}
+div.group-students {
+    height: 230px;
+    overflow: scroll;
+    background-color: #f9f9f9;
+}
+
+div.group-students ul {
+    list-style-type: none;
+    margin:0;
+}
+div.group-students ul li{
+    padding-left: 5px;
+}
+
+div#groups{
+    margin-top: 20px;
+}
+
+table.small-rows tr td {
+    padding: 2px 8px;
+}
+
+table.small-table-1{
+    width: 15%;
+    float:left;
+}
+
+table.attendance-statistic-table-2 tr.second-row th{
+    padding: 2px;
+    font-size: 10px;
+}
+
+.weekend {
+    background-color: #fbdad4 !important
+}
+
+.orderLesson {
+    background: red !important;
+}
+
+.lesson-order-info {
+    width: 100%;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+div.chosen-container , table#phones{
+    font-size:16px;
+}
