@@ -230,16 +230,18 @@ SQL;
             return array();
 
         $sql=<<<SQL
-            SELECT sg4, sem4, gr7,gr3,gr1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
-            FROM SP
-            INNER JOIN SG ON (SP1 = SG2)
-            INNER JOIN SEM ON (SG1 = SEM2)
-            INNER JOIN GR ON (SG1 = GR2)
-            INNER JOIN GRK ON (GR1 = GRK1)
-            WHERE gr13=0 and sp5=:FACULTY and gr6 is null and sem3=:YEAR1 and sem5=:SEM1 and grk2=:YEAR2 and grk3=:SEM2
-            and (grk4 > 0 or grk5 > 0 or grk6 > 0 or grk7 > 0) and sem4=:COURSE
-            GROUP BY sg4, sem4, gr7,gr3,gr1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
-            ORDER BY gr7,gr3
+           SELECT sg4, sem4, gr7,gr3,gr1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
+			from sp
+			   inner join sg on (sp.sp1 = sg.sg2)
+			   inner join sem on (sg.sg1 = sem.sem2)
+			   inner join gr on (sg.sg1 = gr.gr2)
+			   inner join ucgn on (gr.gr1 = ucgn.ucgn2)
+			   inner join ucgns on (ucgn.ucgn1 = ucgns.ucgns2)
+			   inner join ucxg on (ucgn.ucgn1 = ucxg.ucxg2)
+			WHERE ucxg1<30000 and gr13=0 and gr6 is null
+				 and sp5=:FACULTY and sem3=:YEAR1 and sem5=:SEM1 and ucgns5=:YEAR2 and ucgns6=:SEM2 and sem4=:COURSE
+			GROUP BY sg4, sem4, gr7,gr3,gr1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
+			ORDER BY gr7,gr3
 SQL;
 
         list($year, $sem) = SH::getCurrentYearAndSem();

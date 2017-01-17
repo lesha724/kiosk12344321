@@ -52,7 +52,7 @@ $this->breadcrumbs=array(
     <?php
         $html = '';
         foreach ($phones as $phone) {
-            $name=$phone[k3];
+            $name=$phone['k3'];
             if($phone['tso4']==0)
                 $name=$phone['tso12'];
             $html .= <<<HTML
