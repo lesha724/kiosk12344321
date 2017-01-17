@@ -12,15 +12,19 @@ $form=$this->beginWidget('CActiveForm', array(
 
     $html = '<div>';
     $html .= '<fieldset>';
-    $filials = CHtml::listData(Ks::model()->findAll(), 'ks1', 'ks2');
+    $filials = Ks::getListDataForKsFilter();
     if (count($filials) > 1) {
         $html .= '<div class="span3 ace-select">';
         $html .= $form->label($model, 'filial');
         $html .= $form->dropDownList($model, 'filial', $filials, $options);
         $html .= '</div>';
+    }else{
+        $model->filial = key($filials);
     }
 
     $faculties = CHtml::listData(F::model()->getFacultiesFor($model->filial), 'f1', 'f3');
+    if(count($faculties)==1)
+    $model->faculty = key($faculties);
     $html .= '<div class="span3 ace-select">';
     $html .= $form->label($model, 'faculty');
     $html .= $form->dropDownList($model, 'faculty', $faculties, $options);

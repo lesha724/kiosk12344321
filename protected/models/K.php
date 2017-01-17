@@ -164,7 +164,7 @@ SQL;
 				FROM F
 				inner join k on (f.f1 = k.k7)
 			WHERE f12='1' and f17='0' and k11='1' and k10=:FILIAL and (k9 is null) and K1>0
-			ORDER BY K3
+			ORDER BY K3 collate UNICODE
 SQL;
 
         $command = Yii::app()->db->createCommand($sql);

@@ -192,10 +192,10 @@ class F extends CActiveRecord
     public function getFacultiesFor($filial)
     {
         $sql=<<<SQL
-            SELECT f1, f3, f26, f27, f28, f30
+           SELECT f1, f3, f26, f27, f28, f30
             FROM f
             WHERE f1>0 and f12<>0 and f17=0 and (f19 is null) and f14=:FILIAL and f32 = 0
-            ORDER BY f15,f3
+            ORDER BY f15,f3 collate UNICODE
 SQL;
 
         $command = Yii::app()->db->createCommand($sql);

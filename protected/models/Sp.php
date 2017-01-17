@@ -135,14 +135,14 @@ class Sp extends CActiveRecord
 
     public function getCoursesFor($faculty, $speciality = null)
     {
-        if (empty($faculty))
-            return array();
+		if (empty($faculty))
+			return array();
 
-        $extraCondition = null;
-        if (! empty($speciality))
-            $extraCondition = ' and sp11='.$speciality;
+		$extraCondition = null;
+		if (! empty($speciality))
+			$extraCondition = ' and sp11='.$speciality;
 
-        $sql=<<<SQL
+		$sql=<<<SQL
             SELECT sem4
             FROM SP
             INNER JOIN SG ON (SP.SP1 = SG.SG2)
@@ -151,20 +151,20 @@ class Sp extends CActiveRecord
             GROUP BY sem4
 SQL;
 
-        list($year, $sem) = SH::getCurrentYearAndSem();
+		list($year, $sem) = SH::getCurrentYearAndSem();
 
-        $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(':FACULTY', $faculty);
-        $command->bindValue(':YEAR', $year);
-        $command->bindValue(':SEM', $sem);
-        $courses = $command->queryAll();
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(':FACULTY', $faculty);
+		$command->bindValue(':YEAR', $year);
+		$command->bindValue(':SEM', $sem);
+		$courses = $command->queryAll();
 
-        $res = array();
-        foreach ($courses as $course) {
-            $res[$course['sem4']] = $course['sem4'];
-        }
+		$res = array();
+		foreach ($courses as $course) {
+			$res[$course['sem4']] = $course['sem4'];
+		}
 
-        return $res;
+		return $res;
     }
 
     public function getSpecialitiesForFaculty($faculty)

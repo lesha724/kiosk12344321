@@ -112,4 +112,34 @@ class Ks extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public static function getListDataForKsFilter(){
+		$res = array();
+		/*--------------госаудит-----------скрывать все филиалы кроме ихнего*/
+		$univeristyCod = SH::getUniversityCod();
+		if($univeristyCod==7){
+			if($_SERVER['SERVER_NAME']=='tt.audit.msu.ru')
+			{
+				$filial = Ks::model()->findByPk(1);
+				if(!empty($filial)){
+					$name =  $filial['ks2'];
+					//$filials[$key]['name'] =
+					$res[0]['name'] = (isset($name)&&!empty($name)&&$name!="")?$name:$filial['ks2'];
+					$res[0]['ks1'] = $filial->ks1;
+					return CHtml::listData($res, 'ks1', 'name');
+				}
+			}
+		}
+		/*--------------госаудит-----------скрывать все филиалы кроме ихнего*/
+		//$filials = CHtml::listData(Ks::model()->findAllByAttributes(array('ks12'=>null,'ks13'=>0)), 'ks1', 'ks2');
+		$filials = Ks::model()->findAllByAttributes(array('ks12'=>null,'ks13'=>0));
+
+		foreach($filials as $key => $filial){
+			$name =  $filial['ks2'];
+			//$filials[$key]['name'] =
+			$res[$key]['name'] = (isset($name)&&!empty($name)&&$name!="")?$name:$filial['ks2'];
+			$res[$key]['ks1'] = $filial->ks1;
+		}
+		return CHtml::listData($res, 'ks1', 'name');
+	}
 }

@@ -448,32 +448,33 @@ class St extends CActiveRecord
     
     public function getSearchStudents($name)
     {
-        if (empty($name))
-            return array();
-			
+		if (empty($name))
+			return array();
+
 		list($year, $sem) = SH::getCurrentYearAndSem();
 		$sql = <<<SQL
-        SELECT st1,st2,st3,st4,gr1,gr3,f1,f2,ks1,ks3,sem4, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26 FROM ks
+        SELECT st1,st2,st3,st4,gr1,gr3,f1,f2,ks1,ks3,sem4,sg1,sp1,pnsp1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26 FROM ks
 			inner join f on (ks.ks1 = f.f14)
 			inner join sp on (f.f1 = sp.sp5)
+                        inner join pnsp on (sp.sp11 = pnsp.pnsp1)
 			inner join sg on (sp.sp1 = sg.sg2)
 			inner join gr on (sg.sg1 = gr.gr2)
 			inner join std on (gr.gr1 = std.std3)
 			inner join st on (std.std2 = st.st1)
 			inner join sem on (sg.sg1 = sem.sem2)
-		where std7 is null and std11 in (0, 5, 6, 8) and st2 CONTAINING :name and sem3=:YEAR1 and sem5=:SEM1
-		GROUP BY st1,st2,st3,st4,gr1,gr3,f1,f2,ks1,ks3,sem4, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
+		where std7 is null and std11 in (0, 5, 6, 8) and st2 CONTAINING :name and sem3=:YEAR1 and sem5=:SEM1 and st101!=7
+		GROUP BY st1,st2,st3,st4,gr1,gr3,f1,f2,ks1,ks3,sem4,sg1,sp1,pnsp1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
         ORDER BY st2 collate UNICODE,ks3,gr3,f2
 SQL;
 		$command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(':name', $name);
+		$command->bindValue(':name', $name);
 		$command->bindValue(':YEAR1', $year);
-        $command->bindValue(':SEM1', $sem);
-        $students= $command->queryAll();
+		$command->bindValue(':SEM1', $sem);
+		$students= $command->queryAll();
 		foreach($students as $key => $student) {
-            $students[$key]['group_name'] = Gr::model()->getGroupName($students[$key]['sem4'], $student);
-        }
-        return $students;
+			$students[$key]['group_name'] = Gr::model()->getGroupName($students[$key]['sem4'], $student);
+		}
+		return $students;
     }
     
     public function getStudentsForAdmin()
@@ -583,30 +584,30 @@ SQL;
 
     public function getStudentsOfGroup($gr1)
     {
-        if (empty($gr1))
-            return array();
+		if (empty($gr1))
+			return array();
 
-        $date1 = date("d.m.Y", strtotime("+ 20 days"));
-        $date2 = date('d.m.Y 00:00:00');
+		//$date1 = date("d.m.Y", strtotime("+ 20 days"));
+		//$date2 = date('d.m.Y 00:00:00');
 
-        $sql=<<<SQL
+		$sql=<<<SQL
             SELECT ST1,ST2,ST3,ST4,sgr2, ST117, ST118, ST119, ST120, ST121, ST122, ST123, ST124,ST125,ST139
             FROM st
             INNER JOIN std on (st.st1 = std.std2)
             INNER JOIN sgr on (st.st32 = sgr.sgr1)
-            WHERE st101<>7 and STD3=:GR1 and STD11 in (0,6,8) and STD4<='{$date1}' and (STD7 is null or STD7>'{$date2}')
-            ORDER BY 2
+            WHERE st101<>7 and STD3=:GR1 and STD11 in (0,5,6,8) and (STD7 is null)
+            ORDER BY ST2 collate UNICODE
 SQL;
 
-        $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(':GR1', $gr1);
-        $students = $command->queryAll();
+		$command = Yii::app()->db->createCommand($sql);
+		$command->bindValue(':GR1', $gr1);
+		$students = $command->queryAll();
 
-        foreach($students as $key => $student) {
-            $students[$key]['name'] = SH::getShortName($student['st2'], $student['st3'], $student['st4']);
-        }
+		foreach($students as $key => $student) {
+			$students[$key]['name'] = SH::getShortName($student['st2'], $student['st3'], $student['st4']);
+		}
 
-        return $students;
+		return $students;
     }
 
     public static function getTimeTable($st1, $date1, $date2)

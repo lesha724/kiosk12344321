@@ -22,9 +22,9 @@ $this->breadcrumbs=array(
 
 <form class="form-inline">
     <?php
-        echo CHtml::label(tt('Подразделение'), 'department');
-        $departments = CHtml::listData(Tsg::model()->findAll('tsg1 > 0'), 'tsg1', 'tsg2');
-        echo CHtml::dropDownList('department', $department, $departments, array('empty' => 'Все'));
+    echo CHtml::label(tt('Подразделение'), 'department');
+    $departments = CHtml::listData(Tsg::model()->findAll('tsg1 > 0 order by tsg3'), 'tsg1', 'tsg2');
+    echo CHtml::dropDownList('department', $department, $departments, array('empty' => 'Все'));
     ?>
 </form>
 

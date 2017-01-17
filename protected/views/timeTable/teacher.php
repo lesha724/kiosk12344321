@@ -43,12 +43,14 @@ $form=$this->beginWidget('CActiveForm', array(
 
 $html = '<div>';
 $html .= '<fieldset>';
-$filials = CHtml::listData(Ks::model()->findAll(), 'ks1', 'ks2');
+$filials = Ks::getListDataForKsFilter();
 if (count($filials) > 1) {
     $html .= '<div class="span3 ace-select">';
     $html .= $form->label($model, 'filial');
     $html .= $form->dropDownList($model, 'filial', $filials, $attr);
     $html .= '</div>';
+}else{
+    $model->filial = key($filials);
 }
 
 $chairs = CHtml::listData(K::model()->getOnlyChairsFor($model->filial), 'k1', 'k3');

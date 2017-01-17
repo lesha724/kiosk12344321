@@ -230,6 +230,18 @@ class ShortCodes extends CApplicationComponent
         }
         return $name;
     }
+
+    public static function getUniversityCod(){
+        $sql=<<<SQL
+			select b15 from b where b1=0
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $id=$command->queryScalar();
+        if(!empty($id))
+            return $id;
+        else
+            return 0;
+    }
 }
 
 class SH extends ShortCodes
