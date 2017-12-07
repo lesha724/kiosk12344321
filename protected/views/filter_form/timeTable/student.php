@@ -22,7 +22,7 @@ $form=$this->beginWidget('CActiveForm', array(
         $model->filial = key($filials);
     }
 
-    $faculties = CHtml::listData(F::model()->getFacultiesFor($model->filial), 'f1', 'f3');
+    $faculties = CHtml::listData(F::model()->getFacultiesFor($model->filial, 1), 'f1', 'f3');
     if(count($faculties)==1)
     $model->faculty = key($faculties);
     $html .= '<div class="span3 ace-select">';

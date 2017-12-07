@@ -189,7 +189,7 @@ class F extends CActiveRecord
 		return parent::model($className);
 	}
 
-    public function getFacultiesFor($filial)
+    public function getFacultiesFor($filial, $type=0)
     {
         $sql=<<<SQL
            SELECT f1, f3, f26, f27, f28, f30
@@ -202,6 +202,13 @@ SQL;
         $command->bindValue(':FILIAL', $filial);
         $faculties = $command->queryAll();
 
-        return $faculties;
+        $res = array();
+        foreach($faculties as $key => $faculty){
+            if($type==1&&SH::getUniversityCod()==U_NULAU&&$faculty['f1']==5)
+                continue;
+            $res[$key] = $faculty;
+        }
+
+        return $res;
     }
 }
