@@ -462,7 +462,7 @@ class St extends CActiveRecord
 			inner join std on (gr.gr1 = std.std3)
 			inner join st on (std.std2 = st.st1)
 			inner join sem on (sg.sg1 = sem.sem2)
-		where std7 is null and std11 in (0, 5, 6, 8) and st2 CONTAINING :name and sem3=:YEAR1 and sem5=:SEM1 and st101!=7
+		where std7 is null and std11 in (0, 5, 6, 8) and st2 CONTAINING :name and sem3=:YEAR1 and sem5=:SEM1 and st101!=7 and f32=0
 		GROUP BY st1,st2,st3,st4,gr1,gr3,f1,f2,ks1,ks3,sem4,sg1,sp1,pnsp1, gr19,gr20,gr21,gr22,gr23,gr24,gr25,gr26
         ORDER BY st2 collate UNICODE,ks3,gr3,f2
 SQL;
